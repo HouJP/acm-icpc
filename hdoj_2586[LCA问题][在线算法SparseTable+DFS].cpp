@@ -11,16 +11,17 @@
 #include <cstdlib>
 #include <algorithm>
 
-// #pragma comment(linker, "/STACK:1024000000,1024000000")
-
 using namespace std;
 
 #define N (40000) // 节点个数
-#define L (30) // DP数组第二维长度
+#define L (30) // DP数组第二维长度,一般不发生变化
 #define M (200)	// 查询个数
 
 int t, n, m;
 int a, b, c;
+
+// LCA问题，在线算法 ST+DFS
+// 时间复杂度 O(n * log(n) + q)，n为总节点数，q为询问节点对数
 
 struct Edge {
 	int u, v, w;
@@ -32,7 +33,7 @@ int ver[2 * N + 5]; // 保存遍历的节点顺序
 int dep[2 * N + 5]; // 保存遍历的节点对应的深度
 int fir[N + 5]; // 保存每个节点在遍历过程中第一次出现的位置
 int dis[N + 5]; // 每个节点到根节点的距离
-int h_pow[M + 5]; // 事先保存2^x，不需要重复计算
+int h_pow[L + 5]; // 事先保存2^x，不需要重复计算
 int dp[2 * N + 5][L + 5]; // sparse table的DP数组
 bool vis[N + 5]; // dfs的标记数组
 int ind; // 生成邻接表指针，遍历树的顺序指针等
@@ -77,15 +78,17 @@ void dfs(int u, int d) {
 	}
 }
 
-// dp，从0的位置开始
-void sparse_table(int len) {
-	// init h_pow
+// init h_pow
+void init_pow_2() {
 	h_pow[0] = 1;
-	for (int i = 1; i <= M; ++i) {
+	for (int i = 1; i <= L; ++i) {
 		h_pow[i] = 2 * h_pow[i - 1];
 	}
-	// sparse table
-	int k = (int)(long((double)len) / log(2.0));
+}
+
+// dp，从0的位置开始
+void sparse_table(int len) {
+	int k = (int)(log((double)len) / log(2.0));
 	for (int i = 0; i < len; ++i) {
 		dp[i][0] = i;
 	}
@@ -126,19 +129,20 @@ int lca(int u, int v) {
 }
 
 int main() {
-	int size = 256 << 20; // 256MB
-	char *p = (char*)malloc(size) + size;
-	__asm__("movl %0, %%esp\n" :: "r"(p));
 	freopen("data", "r", stdin);
 
 	scanf("%d", &t);
+
+	// init
+	init_pow_2();
+
 	while (t--) {
 		read(n);
 		read(m);
 		// 初始化
 		memset(e_head, -1, sizeof(e_head));
 		memset(vis, 0, sizeof(vis));
-		memset(dis, 0, sizeof(dis));
+		dis[0] = 0;
 		// 建边
 		ind = 0;
 		for (int i = 1; i < n; ++i) {

@@ -84,7 +84,7 @@ int main() {
 		memset(e_head, -1, sizeof(e_head));
 		memset(q_head, -1, sizeof(q_head));
 		memset(vis, 0, sizeof(vis));
-		memset(dis, 0, sizeof(dis));
+		dis[0] = 0;
 		make_set(n);
 		// 建树
 		e_index = 0; 
@@ -98,28 +98,11 @@ int main() {
 			scanf("%d%d", &a, &b);
 			add_edge(q, q_head, a - 1, b - 1, -1, e_index);
 		}
-		/*
-		for (int i = 0; i < n ; ++i) {
-			int index = e_head[i];
-			while (-1 != index) {
-				printf("%d\t%d\t%d\t%d\t%d\n", index, e[index].u, e[index].v, e[index].w, e[index].next);
-				index = e[index].next;
-			}
-		}
-		for (int i = 0; i < n; ++i) {
-			int index = q_head[i];
-			while (-1 != index) {
-				printf("%d\t%d\t%d\t%d\t%d\n", index, q[index].u, q[index].v, q[index].w, q[index].next);
-				index = q[index].next;
-			}
-		}
-		*/
 		// dfs，寻找LCA
 		tarjan(0);
 		// 输出
 		for (int i = 0; i < m; ++i) {
 			int k = 2 * i;
-			//printf("u = %d, v = %d, root = %d, dis = %d\n", q[k].u, q[k].v, q[k].w, dis[q[k].u] + dis[q[k].v] - 2 * dis[q[k].w]);
 			printf("%d\n", dis[q[k].u] + dis[q[k].v] - 2 * dis[q[k].w]);
 		}
 	}
