@@ -5,12 +5,20 @@
     > Created Time: 日  4/12 07:34:15 2015
  ************************************************************************/
 
+/*
+ * 思路
+ *
+ * x最大是10^12，结果我用了int存的，导致大数据WA了，分分钟想剖腹自尽。
+ *
+ * */
+
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
 
 using namespace std;
 
+#define LL long long
 #define L (10000)
 
 int trans[5][5] = {
@@ -21,7 +29,8 @@ int trans[5][5] = {
 	{0, 4, 3, -2, -1},
 };
 
-int t, l, x;
+int t, l;
+LL x;
 char str[L + 5];
 bool ans;
 
@@ -29,7 +38,7 @@ void init() {
 	scanf("%d", &t);
 }
 
-int fast_exp(int a, int e) {
+int fast_exp(int a, LL e) {
 	int exp = 1;
 	bool neg = false;
 	while (e) {
@@ -74,13 +83,13 @@ int mul() {
 }
 
 void in() {
-	scanf("%d%d%s", &l, &x, str);
+	scanf("%d%lld%s", &l, &x, str);
 }
 
 void run() {
 	int now = 1, tmp;
 	bool fir = false, sec = false;
-	for (int i = 0; (i < 8) && (i < x); ++i) {
+	for (int i = 0; (i < 16) && (i < x); ++i) {
 		for (int j = 0; j < l; ++j) {
 			if (now < 0) {
 				tmp = -now;
@@ -118,7 +127,7 @@ void out(int cas) {
 }
 
 int main() {
-	//freopen("/Users/hugh_627/Downloads/data", "r", stdin);
+	freopen("/Users/hugh_627/Downloads/data", "r", stdin);
 
 	init();
 	for (int i = 1; i <= t; ++i) {
