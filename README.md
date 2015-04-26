@@ -1,6 +1,6 @@
 ****
 
-##<center>ACM/ICPC Online Judges' Archive Codes</center>
+##<center>Codes of Contests on BestCoder</center>
 ####<center>Author: HouJP_NSD</center>
 ####<center>E-mail: houjp1992@gmail.com</center>
 
@@ -15,7 +15,9 @@
 
 ###<a name="intro">项目介绍</a>
 
-这个项目是用来记录自己ACM切题的代码，文件的命名记录了题目的出处、题号以及解题使用的方法。
+这个项目是用来记录自己在杭电BestCoder上比赛的代码，文件的命名记录了题目的出处、题号以及解题使用的方法。
+
+对于一些比较有趣的题目，会在文件开头以注释的方式记录下思路及收获。
 
 欢迎大家多多交流。
 
