@@ -76,7 +76,6 @@ void in() {
 
 	REP(i, n) {
 		scanf("%d", &v);
-		//printf("v = %d\n", v);
 		if (0 == i) {
 			tree[cnt] = Node(-1, -1, -1, v);
 			m[v] = cnt++;
@@ -87,12 +86,10 @@ void in() {
 				m[v] = cnt++;
 			} else {
 				int f = sta.top(); sta.pop();
-				//printf("v = %d\n", v);
 				while (sta.size() > 0 && sta.top() < v) {
 					f = sta.top();
 					sta.pop();
 				}
-				//printf("f = %d\n", f);
 				tree[cnt] = Node(m[f], -1, -1, v);
 				tree[m[f]].r = cnt;
 				m[v] = cnt++;
@@ -104,15 +101,11 @@ void in() {
 }
 
 void run() {
-	FOR(i, 1, n) {
-		//printf("v = %d: id = %d, p = %d, l = %d, r = %d, v = %d\n", i, m[i], tree[m[i]].p, tree[m[i]].l, tree[m[i]].r, tree[m[i]].v);
-	}
 	REP(i, q) {
 		scanf("%d", &num);
 		int tmp = m[num];
 		int tmp_cnt = 0;
 		while (tree[tmp].p != -1) {
-			//printf("num = %d, tmp = %d\n", num, tmp);
 			if (tree[tree[tmp].p].l == tmp) {
 				path[tmp_cnt++] = 'E';
 			} else {
