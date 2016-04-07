@@ -8,4 +8,4 @@
 
 git add ./
 git commit -m "add "`date +%Y/%m/%d`
-git push -u acm_bc master
+git push -u origin master
